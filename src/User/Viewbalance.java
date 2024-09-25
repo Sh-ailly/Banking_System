@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 public class Viewbalance {
     JTextField tf1;
+    long ball;
     public Viewbalance(){
          JFrame jf3=new JFrame();
                 jf3.setSize(700, 500);
@@ -36,12 +37,35 @@ public class Viewbalance {
                         jf3.dispose();
                     }
                 });
-        
+
                 JButton submit=new JButton("View->");
                 jf3.add(submit);
                 submit.setBounds(450, 370, 150, 25);
                 submit.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
+                        try {
+                            Class.forName("com.mysql.cj.jdbc.Driver");
+                            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/atm", "root", "igotocollegedaily");
+
+                            String query1 = "SELECT Balance FROM details WHERE pin = ?";
+                            PreparedStatement ps = con.prepareStatement(query1);
+                            ps.setString(1, tf1.getText()); // Assuming you are using the pin entered by the user to filter results
+                            ResultSet rs = ps.executeQuery();
+
+                            if (rs.next()) { // Check if there is a result
+                                ball = rs.getLong("Balance"); // Correct way to assign balance
+                            } else {
+                                System.out.println("No balance found for the provided pin.");
+                            }
+
+
+                            rs.close(); // Close the ResultSet
+                            ps.close(); // Close the PreparedStatement
+                            con.close(); // Close the Connection
+                        } catch (Exception ee) {
+                            System.out.println(ee);
+                        }
+
                         String a=tf1.getText();
                         JFrame jf31=new JFrame();
                         jf31.setSize(700, 500);
@@ -55,6 +79,7 @@ public class Viewbalance {
                         JLabel balance=new JLabel();
                         jf31.add(balance);
                         balance.setBounds(350, 100, 600, 40);
+                        balance.setText(Long.toString(ball));
                         balance.setFont(new Font("Arial", Font.PLAIN, 30));
                                 jf3.dispose();
 

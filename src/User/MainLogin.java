@@ -59,7 +59,7 @@ public class MainLogin {
                 else if(tf.getText().contains(" ")){
                     flag++;
                 }
-                
+
                 else if(flag==0)
                 {
                   for(int i=0;i<b.length();i++)

@@ -40,7 +40,7 @@ public class PrimarykeyDeleteUser {
                 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/atm","root","igotocollegedaily");
                 Statement stmt=con.createStatement();
                 String cardno=tf.getText();
-                String query1="DELETE FROM detail WHERE CardNo='" + cardno +"'";
+                String query1="DELETE FROM details WHERE CardNo='" + cardno +"'";
                 stmt.executeUpdate(query1);
                 ResultSet rs=stmt.executeQuery("select * from detail");
                 while(rs.next())
@@ -51,7 +51,7 @@ public class PrimarykeyDeleteUser {
                 System.out.println(t);
               }
               }
-              
+
         });
     }
 }

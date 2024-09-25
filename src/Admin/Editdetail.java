@@ -8,7 +8,7 @@ class Editdetail{
     JTextField tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8;
 
     Editdetail(){
-        JFrame f8=new JFrame(); 
+        JFrame f8=new JFrame();
         f8.setSize(700,500);
         f8.setVisible(true);
         f8.getContentPane().setBackground(Color.CYAN);

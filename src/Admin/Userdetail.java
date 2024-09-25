@@ -73,18 +73,17 @@ public class Userdetail {
     f4.add(blnc);
     blnc.setBounds(400,290,250,30);
 
-    
     JButton addaccount=new JButton("ADD ACCOUNT");
     f4.add(addaccount);
     addaccount.setBounds(450,370,150,25);
     addaccount.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
-    try{  
-        Class.forName("com.mysql.jdbc.Driver");  
-        Connection con=DriverManager.getConnection(  
-        "jdbc:mysql://localhost:3306/atm","root","igotocollegedaily");  
-        Statement stmt=con.createStatement();  
-        String query1= "INSERT INTO detail (FirstName, LastName, Address, City, PhoneNo, Pin, CardNo, Balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/atm","root","igotocollegedaily");
+        Statement stmt=con.createStatement();
+        String query1= "INSERT INTO details (FirstName, LastName, Address, City, PhoneNo, Pin, CardNo, Balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = con.prepareStatement(query1);
         preparedStatement.setString(1, fn.getText());
         preparedStatement.setString(2, ln.getText());
@@ -92,20 +91,18 @@ public class Userdetail {
         preparedStatement.setString(4, cty.getText());
         preparedStatement.setLong(5, Long.parseLong(pn.getText()));
         preparedStatement.setInt(6, Integer.parseInt(pen.getText()));
-        preparedStatement.setLong(7, Long.parseLong(cn.getText())); 
+        preparedStatement.setLong(7, Long.parseLong(cn.getText()));
         preparedStatement.setLong(8, Long.parseLong(blnc.getText()));
 
-        preparedStatement.executeUpdate();    
-        ResultSet rs=stmt.executeQuery("select * from detail");  
-        while(rs.next())  
-        System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
-        con.close();  
+        preparedStatement.executeUpdate();
+        con.close();
         }
         catch(Exception t){
              System.out.println(t);
-            } 
+            }
         }
         });
+
         JButton previous=new JButton("<-Previous");
         f4.add(previous);
         previous.setBounds(80,370,150,25);
